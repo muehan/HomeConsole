@@ -1,1 +1,6 @@
 <p>See here all the ligths</p>
+
+{{range $light := .lights}}
+    {{$light.Name}} -- {{$light.URL}}
+    <br/>
+{{end}}
