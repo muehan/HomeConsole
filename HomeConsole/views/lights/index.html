@@ -1,8 +1,8 @@
 <h1>See here all the ligths</h1>
 
 {{range $light := .lights}}
-    <button class="btn btn-default col-md-2" style="margin-left: 10px;">
-        <h3>{{$light.Name}}</h3>
+    <button class="btn btn-default col-md-2" style="margin-left: 10px; padding-top: 20px; padding-bottom: 20px;">
+        <h3 style="margin-top: 10px;">{{$light.Name}}</h3>
         <!--{{$light.URL}}-->
      </button>
 {{end}}
