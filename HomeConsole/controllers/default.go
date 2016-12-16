@@ -8,9 +8,7 @@ type MainController struct {
 	beego.Controller
 }
 
-func (c *MainController) Get() {
-
-	c.TplName = "index.html"
-	c.Layout = "_layout.html"
-
+func (controller *MainController) Get() {
+	controller.TplName = "index.html"
+	controller.Layout = "_layout.html"
 }
