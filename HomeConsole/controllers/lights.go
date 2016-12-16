@@ -10,9 +10,9 @@ type LightsController struct {
 	beego.Controller
 }
 
-func (c *LightsController) Get() {
+func (controller *LightsController) Get() {
 
-	c.Data["lights"] = services.GetLights()
-	c.TplName = "lights/index.html"
-	c.Layout = "_layout.html"
+	controller.Data["lights"] = services.GetLights()
+	controller.TplName = "lights/index.html"
+	controller.Layout = "_layout.html"	
 }
