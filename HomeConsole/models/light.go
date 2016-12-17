@@ -1,6 +1,10 @@
 package models
 
+type Config struct {
+	Lights []Light `xml:"light"`
+}
+
 type Light struct {
-	Name string
-	URL   string
+	Name string `xml:"Name"`
+	URL  string `xml:"URL"`
 }
