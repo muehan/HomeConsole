@@ -28,3 +28,17 @@ func GetLights() []models.Light {
 
 	return c.Lights
 }
+
+func SetLights(lights *[]models.Light) {
+
+	fmt.Println("Save new lights")
+	fmt.Println(lights)
+
+	b, err := xml.Marshal(lights)
+
+	if err != nil {
+		fmt.Println("error dunring xml parsing")
+	}
+
+	ioutil.WriteFile("homeConfig.xml", b, 0777)
+}
