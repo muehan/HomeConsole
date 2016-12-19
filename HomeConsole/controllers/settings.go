@@ -23,17 +23,24 @@ func (controller *SettingsController) Get() {
 }
 
 func (controller *SettingsController) Post() {
-	lights := new([]models.Light)
+	var config models.Config
 
-	err := controller.ParseForm(&lights)
+	err := controller.ParseForm(&config)
 	fmt.Println(controller.Ctx.Request.Form)
 
 	if err != nil {
 		fmt.Println("Error during parsing Form")
 		fmt.Println(err)
+
+		controller.Abort("500")
 	}
 
-	services.SetLights(lights)
+	if config.Lights == nil {
+		fmt.Println("No lights parse from Form")
+		controller.Abort("500")
+	}
+
+	services.SetLights(&config.Lights)
 
 	controller.Ctx.Redirect(201, "/settings")
 }
