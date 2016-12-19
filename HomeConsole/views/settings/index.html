@@ -1,0 +1,26 @@
+<h1>See here all the ligths</h1>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Url</th>
+        <th></th>
+    </tr>
+    {{range $light := .config.Lights}}
+    
+    <tr>
+        <td>
+            <input type="text" value="{{$light.Name}}" class="form-control" />
+        </td>
+        <td>
+            <input type="text" value="{{$light.URL}}" class="form-control" />
+        </td>
+        <td>
+            <button type="button" class="btn btn-danger">
+                <span class="glyphicon glyphicon-remove-sign" /><span> Delete</span>
+            </button>
+        </td>
+    </tr>
+
+    {{end}}
+</table>

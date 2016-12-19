@@ -11,4 +11,5 @@ func init() {
 	beego.Router("/lights", &controllers.LightsController{})
 	beego.Router("/outtemp", &controllers.OutTempController{})
 	beego.Router("/intemp", &controllers.InTempController{})
+	beego.Router("/settings", &controllers.SettingsController{})
 }
