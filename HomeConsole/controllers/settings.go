@@ -23,9 +23,9 @@ func (controller *SettingsController) Get() {
 }
 
 func (controller *SettingsController) Post() {
-	var config models.Config
+	var post models.Post
 
-	err := controller.ParseForm(&config)
+	err := controller.ParseForm(&post)
 	fmt.Println(controller.Ctx.Request.Form)
 
 	if err != nil {
@@ -35,12 +35,13 @@ func (controller *SettingsController) Post() {
 		controller.Abort("500")
 	}
 
-	if config.Lights == nil {
-		fmt.Println("No lights parse from Form")
-		controller.Abort("500")
-	}
+	// if lights == nil {
+	// 	fmt.Println("No lights parse from Form")
+	// 	controller.Abort("500")
+	// }
 
-	services.SetLights(&config.Lights)
+	fmt.Println(post)
+	// services.SetLights(lights)
 
 	controller.Ctx.Redirect(201, "/settings")
 }
