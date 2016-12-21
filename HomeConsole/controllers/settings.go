@@ -35,13 +35,8 @@ func (controller *SettingsController) Post() {
 		controller.Abort("500")
 	}
 
-	// if lights == nil {
-	// 	fmt.Println("No lights parse from Form")
-	// 	controller.Abort("500")
-	// }
-
 	fmt.Println(post)
-	// services.SetLights(lights)
+	services.AddLight(post)
 
 	controller.Ctx.Redirect(201, "/settings")
 }
