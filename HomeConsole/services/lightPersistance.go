@@ -31,6 +31,7 @@ func GetLights() []models.Light {
 
 func AddLight(post models.Post) {
 
+	// parse xml to config model
 	xmlFile, err := os.Open("homeConfig.xml")
 	if err != nil {
 		fmt.Println("Error opening file:", err)
@@ -46,23 +47,26 @@ func AddLight(post models.Post) {
 	var config models.Config
 	xml.Unmarshal(bytes, &config)
 
-	arrayOfLights := make([]models.Light, len(config.Lights)+1)
+	// find next higest ID and put all array item into the slice
+	// slice is needed to append the new light at the end
+	sliceOfLights := make([]models.Light, len(config.Lights)+1)
 	maxindex := 1
 	for i, c := range config.Lights {
 		if maxindex < c.ID {
 			maxindex = c.ID
 		}
-		arrayOfLights[i] = c
+		sliceOfLights[i] = c
 	}
 	maxindex++
 
+	// map post model into new light and set to last item of the slice
 	newLight := models.Light{}
 	newLight.ID = maxindex
 	newLight.Name = post.Name
 	newLight.URL = post.URL
-	arrayOfLights[len(config.Lights)] = newLight
+	sliceOfLights[len(config.Lights)] = newLight
 
-	config.Lights = arrayOfLights
+	config.Lights = sliceOfLights
 
 	b, err := xml.Marshal(config)
 
