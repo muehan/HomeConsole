@@ -12,4 +12,5 @@ func init() {
 	beego.Router("/outtemp", &controllers.OutTempController{})
 	beego.Router("/intemp", &controllers.InTempController{})
 	beego.Router("/settings", &controllers.SettingsController{})
+	beego.Router("/settings/edit/:id", &controllers.EditSettingsController{})
 }
