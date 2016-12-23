@@ -38,5 +38,5 @@ func (controller *SettingsController) Post() {
 	fmt.Println(post)
 	services.AddLight(post)
 
-	controller.Ctx.Redirect(201, "/settings")
+	controller.Redirect("/settings", 302)
 }

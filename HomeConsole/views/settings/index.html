@@ -1,7 +1,7 @@
 <h1>See here all the ligths</h1>
 
 
-<table class="table">
+<table class="table col-md-6">
     <tr>
         <th>Id</th>
         <th>Name</th>
@@ -11,16 +11,16 @@
     {{range $light := .config.Lights}}
     
     <tr>
-        <td>
+        <td class="col-md-1">
             <input type="text" disabled name="light.Id" value="{{$light.ID}}" class="form-control" />
         </td>
-        <td>
+        <td class="col-md-4">
             <input type="text" name="light.Name" value="{{$light.Name}}" class="form-control" />
         </td>
-        <td>
+        <td class="col-md-4">
             <input type="text" name="light.URL" value="{{$light.URL}}" class="form-control" />
         </td>
-        <td>
+        <td class="col-md-3">
             <button type="button" class="btn btn-primary">
                 <span>Edit</span>
             </button>
@@ -33,9 +33,19 @@
     {{end}}
 </table>
 
-<form method="POST">
+<form method="POST" class="col-md-6">
     <input type="hidden" value="4" name="ID" />
     <table class="table">
+        <tr>
+            <td>
+                <label>Name</label>
+            </td>
+            <td>
+                <label>Url</label>
+            </td>
+            <td>
+            </td>
+        </tr>
         <tr>
             <td>
                 <input type="text" name="Name" class="form-control" />
@@ -44,9 +54,8 @@
                 <input type="text" name="URL" class="form-control" />
             </td>
             <td>
-                <button type="submit" class="btn btn-primary" >Save</button>
+                <button type="submit" class="btn btn-primary" >Add</button>
             </td>
         </tr>
     </table>
-    
 </form>
