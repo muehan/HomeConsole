@@ -1,6 +1,7 @@
 package services
 
 import (
+	"HomeConsole/HomeConsole/helper"
 	"HomeConsole/HomeConsole/models"
 	"encoding/xml"
 	"fmt"
@@ -10,42 +11,14 @@ import (
 
 /// GetLights returns all Lights as List of Light Models from lights.config
 func GetLights() []models.Light {
-
-	xmlFile, err := os.Open("homeConfig.xml")
-	if err != nil {
-		fmt.Println("Error opening file:", err)
-	}
-	defer xmlFile.Close()
-
-	b, err := ioutil.ReadAll(xmlFile)
-
-	if err != nil {
-		fmt.Println("Error Unmarshal file input")
-	}
-
-	var c models.Config
-	xml.Unmarshal(b, &c)
-
-	return c.Lights
+	config := loadConfiguration()
+	return config.Lights
 }
 
 func AddLight(post models.Post) {
 
 	// parse xml to config model
-	xmlFile, err := os.Open("homeConfig.xml")
-	if err != nil {
-		fmt.Println("Error opening file:", err)
-	}
-	defer xmlFile.Close()
-
-	bytes, err := ioutil.ReadAll(xmlFile)
-
-	if err != nil {
-		fmt.Println("Error Unmarshal file input")
-	}
-
-	var config models.Config
-	xml.Unmarshal(bytes, &config)
+	config := loadConfiguration()
 
 	// find next higest ID and put all array item into the slice
 	// slice is needed to append the new light at the end
@@ -66,7 +39,62 @@ func AddLight(post models.Post) {
 	newLight.URL = post.URL
 	sliceOfLights[len(config.Lights)] = newLight
 
-	config.Lights = sliceOfLights
+	saveConfiguration(sliceOfLights)
+}
+
+func ChangeLight(postmodel models.Post) {
+
+	lights := GetLights()
+
+	searchID := helper.StringToInt(postmodel.ID)
+
+	for i, light := range lights {
+
+		if light.ID == searchID {
+			lights[i].Name = postmodel.Name
+			lights[i].URL = postmodel.URL
+		}
+	}
+
+	saveConfiguration(lights)
+}
+
+func GetLight(id int) (light models.Light) {
+
+	lights := GetLights()
+
+	for _, l := range lights {
+		if l.ID == id {
+			light = l
+		}
+	}
+
+	return light
+}
+
+func loadConfiguration() (config models.Config) {
+	// parse xml to config model
+	xmlFile, err := os.Open("homeConfig.xml")
+	if err != nil {
+		fmt.Println("Error opening file:", err)
+	}
+	defer xmlFile.Close()
+
+	bytes, err := ioutil.ReadAll(xmlFile)
+
+	if err != nil {
+		fmt.Println("Error Unmarshal file input")
+	}
+
+	xml.Unmarshal(bytes, &config)
+
+	return config
+}
+
+func saveConfiguration(lights []models.Light) {
+	var config models.Config
+
+	config.Lights = lights
 
 	b, err := xml.Marshal(config)
 

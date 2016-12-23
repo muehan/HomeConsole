@@ -12,18 +12,18 @@
     
     <tr>
         <td class="col-md-1">
-            <input type="text" disabled name="light.Id" value="{{$light.ID}}" class="form-control" />
+            <input type="text" disabled value="{{$light.ID}}" class="form-control" />
         </td>
         <td class="col-md-4">
-            <input type="text" name="light.Name" value="{{$light.Name}}" class="form-control" />
+            <input type="text" disabled value="{{$light.Name}}" class="form-control" />
         </td>
         <td class="col-md-4">
-            <input type="text" name="light.URL" value="{{$light.URL}}" class="form-control" />
+            <input type="text" disabled value="{{$light.URL}}" class="form-control" />
         </td>
         <td class="col-md-3">
-            <button type="button" class="btn btn-primary">
+            <a href="/settings/edit/{{$light.ID}}" class="btn btn-primary">
                 <span>Edit</span>
-            </button>
+            </a>
             <button type="button" class="btn btn-danger">
                 <span class="glyphicon glyphicon-remove-sign" /><span> Delete</span>
             </button>

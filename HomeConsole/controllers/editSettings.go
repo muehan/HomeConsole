@@ -3,9 +3,10 @@ package controllers
 import (
 	"HomeConsole/HomeConsole/models"
 	"HomeConsole/HomeConsole/services"
-	"strconv"
 
 	"fmt"
+
+	"HomeConsole/HomeConsole/helper"
 
 	"github.com/astaxie/beego"
 )
@@ -16,22 +17,29 @@ type EditSettingsController struct {
 
 func (controller *EditSettingsController) Get() {
 	param := controller.Ctx.Input.Param(":id")
-	id, err := strconv.Atoi(param)
-	if err != nil {
-		fmt.Println("Error during parsing")
-	}
+	id := helper.StringToInt(param)
 
-	lights := services.GetLights()
-
-	var light models.Light
-
-	for _, l := range lights {
-		if l.ID == id {
-			light = l
-		}
-	}
+	light := services.GetLight(id)
 
 	controller.Data["light"] = light
 	controller.TplName = "settings/edit.html"
 	controller.Layout = "_layout.html"
+}
+
+func (controller *EditSettingsController) Post() {
+	var post models.Post
+	err := controller.ParseForm(&post)
+
+	fmt.Println(post)
+
+	if err != nil {
+		fmt.Println("Error during parsing Form")
+		fmt.Println(err)
+
+		controller.Abort("500")
+	}
+
+	services.ChangeLight(post)
+
+	controller.Redirect("/settings", 302)
 }
