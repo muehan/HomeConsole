@@ -72,6 +72,22 @@ func GetLight(id int) (light models.Light) {
 	return light
 }
 
+func DeleteLight(id int) {
+	config := loadConfiguration()
+
+	for i, light := range config.Lights {
+		if light.ID == id {
+			config.Lights = remove(config.Lights, i)
+		}
+	}
+
+	saveConfiguration(config.Lights)
+}
+
+func remove(slice []models.Light, s int) []models.Light {
+	return append(slice[:s], slice[s+1:]...)
+}
+
 func loadConfiguration() (config models.Config) {
 	// parse xml to config model
 	xmlFile, err := os.Open("homeConfig.xml")

@@ -1,21 +1,19 @@
 package controllers
 
 import (
+	"HomeConsole/HomeConsole/helper"
 	"HomeConsole/HomeConsole/models"
 	"HomeConsole/HomeConsole/services"
-
 	"fmt"
-
-	"HomeConsole/HomeConsole/helper"
 
 	"github.com/astaxie/beego"
 )
 
-type EditSettingsController struct {
+type SettingsEditController struct {
 	beego.Controller
 }
 
-func (controller *EditSettingsController) Get() {
+func (controller *SettingsEditController) Get() {
 	param := controller.Ctx.Input.Param(":id")
 	id := helper.StringToInt(param)
 
@@ -26,7 +24,7 @@ func (controller *EditSettingsController) Get() {
 	controller.Layout = "_layout.html"
 }
 
-func (controller *EditSettingsController) Post() {
+func (controller *SettingsEditController) Post() {
 	var post models.Post
 	err := controller.ParseForm(&post)
 

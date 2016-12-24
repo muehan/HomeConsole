@@ -1,22 +1,22 @@
 <form method="POST" class="col-md-4">
     <div class="form-group">
         <label for="inputEmail">ID</label>
-        <input type="text" readonly name="ID" class="form-control" id="inputEmail" value="{{.light.ID}}" />
+        <input type="text" readonly  name="ID" class="form-control" id="inputEmail" value="{{.light.ID}}" />
     </div>
     
      <div class="form-group">
         <label for="inputName">Name</label>
-        <input type="text" name="Name" class="form-control" id="inputName" value="{{.light.Name}}" />
+        <input type="text" readonly name="Name" class="form-control" id="inputName" value="{{.light.Name}}" />
     </div>
     
     <div class="form-group">
         <label for="inputUrl">Url</label>
-        <input type="text" name="URL" class="form-control" id="inputUrl" value="{{.light.URL}}" />
+        <input type="text" readonly name="URL" class="form-control" id="inputUrl" value="{{.light.URL}}" />
     </div>
 
     <div class="form-group">
         <button type="submit" class="btn btn-primary pull-right">
-            Save
+            Delete
         </button>
     </div>
 </form>
