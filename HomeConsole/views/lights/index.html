@@ -1,8 +1,19 @@
 <h1>See here all the ligths</h1>
 
 {{range $light := .lights}}
-    <button class="btn btn-default col-md-2" style="margin-left: 10px; padding-top: 20px; padding-bottom: 20px;">
+    <button class="btn btn-default col-md-2" style="margin-left: 10px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 5px;" onclick="httpGet({{$light.URL}})">
         <h3 style="margin-top: 10px;">{{$light.Name}}</h3>
         <!--{{$light.URL}}-->
      </button>
 {{end}}
+
+<script>
+    function httpGet(url) {
+        alert(url);
+        $.get(
+            url, function(data) {
+                alert('page content: ' + data);
+            }
+        );
+    }
+</script>
