@@ -1,7 +1,7 @@
 <h1>See here all the ligths</h1>
 
 {{range $light := .lights}}
-    <button class="btn btn-default col-md-2" style="margin-left: 10px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 5px;" onclick="httpGet({{$light.URL}})">
+    <button class="btn btn-default col-lg-2 col-md-4 col-xs-12" style="margin-left: 10px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 5px;" onclick="httpGet({{$light.URL}})">
         <h3 style="margin-top: 10px;">{{$light.Name}}</h3>
         <!--{{$light.URL}}-->
      </button>
